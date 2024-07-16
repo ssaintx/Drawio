@@ -1,40 +1,21 @@
-import Node from '../nodes/Node';
+import CustomNode from './CustomNode';
+import { Node, NodeTypes } from '@xyflow/react';
 
-export const nodeTypes = {
-    node: Node,
+export type NodeTitleType = Node<{ title: string }, 'title'>;
+export type NodeDescripionType = Node<{ description: string }, 'description'>;
+
+export type CustomNodeTypes = NodeTitleType | NodeDescripionType;
+
+export const nodeTypes: NodeTypes = {
+    node: CustomNode,
 };
 
-export const initNodes = [
+export const initialNodes: Node[] = [
     {
         id: '1',
         type: 'node',
-        data: { name: 'Jane Doe', job: 'CEO', emoji: '😎' },
-        position: { x: 0, y: 50 },
-    },
-    {
-        id: '2',
-        type: 'node',
-        data: { name: 'Tyler Weary', job: 'Designer', emoji: '🤓' },
-
-        position: { x: -200, y: 200 },
-    },
-    {
-        id: '3',
-        type: 'node',
-        data: { name: 'Kristi Price', job: 'Developer', emoji: '🤩' },
-        position: { x: 200, y: 200 },
-    },
-];
-
-export const initEdges = [
-    {
-        id: 'e1-2',
-        source: '1',
-        target: '2',
-    },
-    {
-        id: 'e1-3',
-        source: '1',
-        target: '3',
+        data: { title: 'Jane Doe', description: 'CEO' },
+        position: { x: 0, y: 0 },
+        className: 'bg-zinc-900 rounded-[1rem]',
     },
 ];

@@ -1,44 +1,60 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import {
     ReactFlow,
-    useNodesState,
-    useEdgesState,
     addEdge,
     Controls,
     MiniMap,
     Background,
+    applyNodeChanges,
+    applyEdgeChanges,
+    Edge,
+    OnNodesChange,
+    OnEdgesChange,
+    OnConnect,
 } from '@xyflow/react';
 import '@xyflow/react/dist/base.css';
 
 import { ViewPortProps } from '@/lib/props';
-import { initEdges, initNodes, nodeTypes } from '../nodes/node.config';
-
+import { initialNodes, nodeTypes } from '../nodes/node.config';
+import { initialEdges, edgeTypes } from '../edges/edge.config';
 
 const ViewPort = ({ style }: ViewPortProps) => {
-    const [nodes, setNodes, onNodesChange] = useNodesState(initNodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initEdges);
+    const [nodes, setNodes] = useState<Node[]>(initialNodes);
+    const [edges, setEdges] = useState<Edge[]>(initialEdges);
 
-    const onConnect = useCallback(
-        (params: any) => setEdges((eds) => addEdge(params, eds)),
-        [],
+    const onNodesChange: OnNodesChange = useCallback(
+        (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+        [setNodes],
+    );
+    const onEdgesChange: OnEdgesChange = useCallback(
+        (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+        [setEdges],
+    );
+    const onConnect: OnConnect = useCallback(
+        (connection) => {
+            const edge = { ...connection, type: 'edge'};
+            setEdges((eds) => addEdge(edge, eds))
+        },
+        [setEdges],
     );
 
     return (
         <ReactFlow
             nodes={nodes}
+            nodeTypes={nodeTypes}
             edges={edges}
+            edgeTypes={edgeTypes}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
-            nodeTypes={nodeTypes}
             fitView
-            colorMode='dark'
             className={`${style} text-white`}
+            colorMode='dark'
         >
             <Background />
             <MiniMap className='md:block hidden' />
             <Controls />
-        </ReactFlow>
+        </ReactFlow >
     );
 };
 
