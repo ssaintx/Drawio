@@ -1,24 +1,18 @@
-import { navItems } from "@/constants";
+import { add } from "@/assets";
 import { SidebarProps } from "@/lib/props";
+import { SidebarButton } from "./SidebarButton";
 
-
-const Sidebar = ({ style }: SidebarProps) => {
+const Sidebar = ({ style, addNode }: SidebarProps) => {
   return (
-    <div className={`${style} flex`}>
-      <div className="p-6 flex flex-col justify-center">
-        {navItems.map((item) => (
-          <div className="flex items-center mb-10" key={item.id}>
-            <img
-              src={item.icon}
-              alt={item.name}
-              width={24}
-              height={24}
-            />
-            <p className="ml-3 text-lg text-zinc-50">{item.name}</p>
-          </div>
-        ))}
+    <aside className={`${style} flex`}>
+      <div className="p-1 flex flex-col justify-center items-start w-screen sm:p-6">
+        <SidebarButton 
+          img={add}
+          label="Add"
+          handleClick={() => addNode && addNode()}
+        />
       </div>
-    </div>
+    </aside>
   );
 };
 
