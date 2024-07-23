@@ -4,7 +4,7 @@ export interface SidebarProps {
 };
 
 export interface SidebarButtonProps {
-    handleClick?: () => void | undefined;
+    handleClick?: () => void;
     className?: string;
     label?: string;
     img?: string;
@@ -16,17 +16,18 @@ export interface AddNodeProps {
 }
 
 export interface ContextMenuProps {
-    id: string;
-    top: number;
-    left: number;
-    right: number;
-    bottom: number;
+    id?: string;
+    top?: any;
+    left?: any;
+    right?: any;
+    bottom?: any;
+    onClick?: () => void;
 };
 
 export interface MenuProps {
-    id: string;
-    top: number | boolean;
-    left: number | boolean;
-    right: number | boolean;
-    bottom: number | boolean;
+    id?: string;
+    top?: any;
+    left?: any;
+    right?: any;
+    bottom?: any;
 }

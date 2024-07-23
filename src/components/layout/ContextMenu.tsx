@@ -3,9 +3,10 @@ import { useReactFlow } from '@xyflow/react';
 import { ContextMenuProps } from '@/lib/props';
 import { copy, deleteIcon } from '@/assets';
 import { SidebarButton } from './SidebarButton';
+import { v4 } from 'uuid';
 
 export const ContextMenu = ({
-    id,
+    id = "",
     top,
     left,
     right,
@@ -29,8 +30,8 @@ export const ContextMenu = ({
         addNodes({
             ...node,
             selected: false,
-            dragging: false,
-            id: `${node.id}-copy`,
+            dragging: false,    
+            id: `${node.id}-copy-${v4()}`,
             position,
         });
     }, [getNode, addNodes, id]);
@@ -42,20 +43,23 @@ export const ContextMenu = ({
 
     return (
         <div
-            style={{ top, left, right, bottom }}
-            className="absolute p-6 rounded-2xl z-10 bg-zinc-900 leading-6"
+            style={{
+                top: top - 20,
+                left: left,
+            }}
+            className="absolute p-6 rounded-2xl z-10 leading-6 glassmorphism shadow-base"
             {...props}
         >
             <SidebarButton
                 img={copy}
                 label="Copy"
-                className="bg-transparent p-0 text-white w-[100%] flex justify-start font-normal"
+                className="bg-transparent p-1 text-white w-[100%] flex justify-start font-normal hover:bg-transparent hover:border-l-[1px] hover:border-gray-300 rounded-none"
                 handleClick={duplicateNode}
             />
             <SidebarButton
                 img={deleteIcon}
                 label="Delete"
-                className="bg-transparent p-0 text-red-500 w-[100%] flex justify-start font-normal"
+                className="bg-transparent p-1 text-red-500 w-[100%] flex justify-start font-normal hover:bg-transparent hover:border-l-[1px] hover:border-red-500 rounded-none"
                 handleClick={deleteNode}
             />
         </div>

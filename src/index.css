@@ -63,7 +63,18 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  .glassmorphism {
+    backdrop-filter: blur(20px) saturate(100%);
+    -webkit-backdrop-filter: blur(20px) saturate(100%);
+    background-color: rgba(24, 24, 27, 0.64);
+  }
+
+  .shadow-base {
+    box-shadow: 3px 4px 58px 9px rgba(16, 16, 19, 0.14);
   }
 }

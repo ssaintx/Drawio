@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import { useCallback, useRef, useState } from 'react';
 import {
     ReactFlow,
@@ -8,8 +9,8 @@ import {
     useNodesState,
     OnNodesChange,
     applyNodeChanges,
-    OnEdgesChange,
     applyEdgeChanges,
+    OnEdgesChange,
     OnConnect,
     addEdge,
 } from '@xyflow/react';
@@ -26,8 +27,11 @@ const App = () => {
     const [nodes, setNodes] = useNodesState(initialNodes);
     const [edges, setEdges] = useEdgesState(initialEdges);
     const [menu, setMenu] = useState<MenuProps | null>(null);
-    const ref = useRef<HTMLDivElement>(null);
 
+    const ref = useRef<HTMLDivElement | null>(null);
+
+    const nodeXPosition = useRef(0);
+    const nodeYPosition = useRef(0);
 
     const onNodesChange: OnNodesChange = useCallback(
         (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -40,43 +44,38 @@ const App = () => {
     );
 
     const onConnect: OnConnect = useCallback(
-        (connection) => {
-            const edge = { ...connection, type: 'edge' };
-            setEdges((eds) => addEdge(edge, eds))
-        },
+        (connection) => setEdges((eds) => addEdge({ ...connection, type: 'edge' }, eds)),
         [setEdges],
     );
 
     const addNode = useCallback(() => {
         const newNode = {
-            id: Math.random().toString(),
+            id: v4(),
             type: 'node',
-            position: { x: 100, y: 0 + (nodes.length + 1) * 20 },
+            position: { x: nodeXPosition.current += 50, y: nodeYPosition.current += 50},
             data: { title: 'example', description: 'example' },
             className: 'bg-zinc-900 rounded-[1rem]',
         };
-        setNodes((nds: any) => (nds ? nds.concat(newNode) : [newNode]));
-    }, [nodes, setNodes]);
+        setNodes((nds) => nds.concat(newNode));
+    }, [setNodes]);
 
     const onNodeContextMenu = useCallback(
-        (event: any, node: Node[]) => {
-            event.preventDefault();
-
-            if (ref.current) {
-                const pane = ref.current.getBoundingClientRect();
-                setMenu({
-                    id: node.id,
-                    top: event.clientY < pane.height - 200 && event.clientY,
-                    left: event.clientX < pane.width - 50 && event.clientX,
-                    right: event.clientX >= pane.width - 50 && pane.width - event.clientX,
-                    bottom: event.clientY >= pane.height - 50 && pane.height - event.clientY,
-                });
-            }
+        (event: React.MouseEvent<HTMLDivElement>, node: any) => {
+          event.preventDefault();
+      
+          const pane = ref.current?.getBoundingClientRect();
+          if (pane) {
+            setMenu({
+              id: node.id,
+              top: event.clientY - pane.top,
+              left: event.clientX - pane.left,
+            });
+          }
         },
         [setMenu],
-    );
-
-    const onPaneClick = useCallback(() => setMenu(null), [setMenu]);
+      );
+    
+      const onPaneClick = useCallback(() => setMenu(null), [setMenu]);
 
     return (
         <div className="grid grid-cols-5 grid-rows-5 gap-4">
@@ -104,7 +103,7 @@ const App = () => {
                 <MiniMap className='md:block hidden' />
                 <Controls />
                 {menu && <ContextMenu onClick={onPaneClick} {...menu} />}
-            </ReactFlow >
+            </ReactFlow>
         </div>
     );
 };
