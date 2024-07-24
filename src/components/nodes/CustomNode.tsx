@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, ReactNode } from 'react';
 import { CustomNodeTypes } from './node.config';
 import { Handle, NodeProps, NodeResizer, Position } from '@xyflow/react';
 
@@ -14,11 +14,11 @@ const CustomNode = ({ data, selected }: NodeProps<CustomNodeTypes>) => {
 
             <div className="flex flex-col gap-2">
                 <div className="ml-2 text-center">
-                    <p className='text-lg'>{data.title}</p>
+                    <p className='text-lg'>{data.title as ReactNode}</p>
                 </div>
                 <hr />
                 <div>
-                    <p className="text-gray-500">{data.description}</p>
+                    <p className="text-gray-500">{data.description as ReactNode}</p>
                 </div>
 
             </div>

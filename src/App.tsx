@@ -17,6 +17,7 @@ import {
 import '@xyflow/react/dist/base.css';
 
 import { MenuProps } from './lib/props';
+import { Download } from './components/layout/Download';
 import { ContextMenu } from './components/layout/ContextMenu';
 import { initialNodes, nodeTypes } from './components/nodes/node.config';
 import { initialEdges, edgeTypes } from './components/edges/edge.config';

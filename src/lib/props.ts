@@ -30,4 +30,9 @@ export interface MenuProps {
     left?: any;
     right?: any;
     bottom?: any;
-}
+};
+
+export interface ModalProps {
+    open: boolean;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};

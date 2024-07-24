@@ -1,54 +1,27 @@
-import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/dialog";
+import { ReactNode } from "react";
+import { ModalProps } from "@/lib/props";
+import { initialNodes } from "../nodes/node.config";
 
-export const Modal = () => {
+export const Modal = ({ open, setOpen }: ModalProps) => {
     return (
-        <Dialog>
-            <DialogTrigger asChild>
-                <Button variant="outline">Edit Profile</Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogContent className="bg-zinc-900 border-none text-white w-auto">
                 <DialogHeader>
-                    <DialogTitle>Edit profile</DialogTitle>
-                    <DialogDescription>
-                        Make changes to your profile here. Click save when you're done.
-                    </DialogDescription>
+                    <DialogTitle className="text-center">Nodes</DialogTitle>
                 </DialogHeader>
-                <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
-                            Name
-                        </Label>
-                        <Input
-                            id="name"
-                            defaultValue="Pedro Duarte"
-                            className="col-span-3"
-                        />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="username" className="text-right">
-                            Username
-                        </Label>
-                        <Input
-                            id="username"
-                            defaultValue="@peduarte"
-                            className="col-span-3"
-                        />
-                    </div>
+                <div className="flex flex-col gap-4 p-4">
+                    {initialNodes.map((node) => (
+                        <div key={node.id} className="border-b-2 border-zinc-700 p-2">
+                            <p>{node.data.title as ReactNode} - <span className="text-zinc-400">{node.data.description as ReactNode}</span></p>
+                        </div>
+                    ))}
                 </div>
-                <DialogFooter>
-                    <Button type="submit">Save changes</Button>
-                </DialogFooter>
             </DialogContent>
         </Dialog>
     );
