@@ -1,16 +1,15 @@
 import { Modal } from "./Modal";
 import { useState } from "react";
-import { Download } from "./Download";
 import { SidebarProps } from "@/lib/props";
 import { SidebarButton } from "./SidebarButton";
-import { add, download, items } from "@/assets";
+import { add, items } from "@/assets";
 
 const Sidebar = ({ style, addNode }: SidebarProps) => {
   const [open, setOpen] = useState(false);
 
   const toggleModal = () => {
     setOpen(!open);
-  }
+  };
 
   return (
     <aside className={`${style} flex`}>
@@ -28,12 +27,6 @@ const Sidebar = ({ style, addNode }: SidebarProps) => {
           handleClick={() => { toggleModal() }}
         />
         <Modal open={open} setOpen={setOpen} />
-        <SidebarButton 
-          img={download}
-          label="Download"
-          className="hover:border-l-[1px] hover:border-gray-300 rounded-none"
-          handleClick={() => { Download() }}
-        />
       </div>
     </aside>
   );

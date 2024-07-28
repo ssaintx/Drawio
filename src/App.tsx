@@ -17,7 +17,6 @@ import {
 import '@xyflow/react/dist/base.css';
 
 import { MenuProps } from './lib/props';
-import { Download } from './components/layout/Download';
 import { ContextMenu } from './components/layout/ContextMenu';
 import { initialNodes, nodeTypes } from './components/nodes/node.config';
 import { initialEdges, edgeTypes } from './components/edges/edge.config';
@@ -53,7 +52,7 @@ const App = () => {
         const newNode = {
             id: v4(),
             type: 'node',
-            position: { x: nodeXPosition.current += 50, y: nodeYPosition.current += 50},
+            position: { x: nodeXPosition.current += 50, y: nodeYPosition.current += 50 },
             data: { title: 'example', description: 'example' },
             className: 'bg-zinc-900 rounded-[1rem]',
         };
@@ -62,21 +61,21 @@ const App = () => {
 
     const onNodeContextMenu = useCallback(
         (event: React.MouseEvent<HTMLDivElement>, node: any) => {
-          event.preventDefault();
-      
-          const pane = ref.current?.getBoundingClientRect();
-          if (pane) {
-            setMenu({
-              id: node.id,
-              top: event.clientY - pane.top,
-              left: event.clientX - pane.left,
-            });
-          }
+            event.preventDefault();
+
+            const pane = ref.current?.getBoundingClientRect();
+            if (pane) {
+                setMenu({
+                    id: node.id,
+                    top: event.clientY - pane.top,
+                    left: event.clientX - pane.left,
+                });
+            }
         },
         [setMenu],
-      );
-    
-      const onPaneClick = useCallback(() => setMenu(null), [setMenu]);
+    );
+
+    const onPaneClick = useCallback(() => setMenu(null), [setMenu]);
 
     return (
         <div className="grid grid-cols-5 grid-rows-5 gap-4">

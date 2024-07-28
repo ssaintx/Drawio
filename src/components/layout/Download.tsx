@@ -5,6 +5,8 @@ import {
     Panel,
 } from '@xyflow/react';
 import { toPng } from 'html-to-image';
+import { SidebarButton } from './SidebarButton';
+import { download } from '@/assets';
 
 export const downloadImage = (dataUrl: string) => {
     const a = document.createElement('a');
@@ -33,7 +35,7 @@ export const Download = () => {
 
         const viewportElement = document.querySelector('.react-flow__viewport') as HTMLElement;
         toPng(viewportElement, {
-            backgroundColor: '#18181b',
+            backgroundColor: '#141414',
             width: imageWidth,
             height: imageHeight,
             style: {
@@ -45,8 +47,12 @@ export const Download = () => {
     }
 
     return (
-        <Panel position="top-right">
-            <button onClick={onClick}>Download</button>
-        </Panel>
-    )
+        // <SidebarButton 
+        // img={download}
+        // label="Download"
+        // className="hover:border-l-[1px] hover:border-gray-300 rounded-none"
+        // handleClick={() => { onClick() }}
+        // />
+        null
+    );
 };
