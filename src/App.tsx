@@ -19,7 +19,7 @@ import '@xyflow/react/dist/base.css';
 import { MenuProps } from './lib/props';
 import { ContextMenu } from './components/layout/ContextMenu';
 import { loadNodes, nodeTypes } from './components/nodes/node.config';
-import { edgeTypes, loadEdges } from './components/edges/edge.config';
+import { loadEdges, edgeTypes } from './components/edges/edge.config';
 
 import Sidebar from './components/layout/Sidebar';
 

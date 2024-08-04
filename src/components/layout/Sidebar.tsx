@@ -1,19 +1,30 @@
-import { Modal } from "./Modal";
 import { useState } from "react";
+import { NodesModal } from "./NodesModal";
 import { SidebarProps } from "@/lib/props";
 import { SidebarButton } from "./SidebarButton";
-import { add, items } from "@/assets";
+import { add, edgeIcon, logo, nodeIcon, settings } from "@/assets";
+import { EdgesModal } from "./EdgesModal";
 
 const Sidebar = ({ style, addNode }: SidebarProps) => {
-  const [open, setOpen] = useState(false);
+  const [openNodeModal, setOpenNodeModal] = useState(false);
+  const [openEdgeModal, setOpenEdgeModal] = useState(false);
 
-  const toggleModal = () => {
-    setOpen(!open);
+  const toggleNodeModal = () => {
+    setOpenNodeModal(!openNodeModal);
   };
 
+  const toggleEdgeModal = () => {
+    setOpenEdgeModal(!openEdgeModal);
+  }
+
   return (
-    <aside className={`${style} flex`}>
-      <div className="p-1 flex flex-col justify-center items-center sm:items-start sm:ml-0 ml-2 px-0 sm:px-4">
+    <aside className={`${style} flex flex-col justify-between sm:p-6 p-2 text-white`}>
+      <div className="flex flex-row gap-1 items-center">
+        <img src={logo} alt="Drawio" width={38} height={38} className="md:w-[38px] md:h-[38px] w-[50px] h-[50px]" />
+        <h1 className="text-2xl md:flex hidden">Drawio</h1>
+      </div>
+
+      <div>
         <SidebarButton
           img={add}
           label="Add"
@@ -21,12 +32,28 @@ const Sidebar = ({ style, addNode }: SidebarProps) => {
           handleClick={() => addNode && addNode()}
         />
         <SidebarButton
-          img={items}
+          img={nodeIcon}
           label="Nodes"
           className="hover:border-l-[1px] hover:border-gray-300 rounded-none"
-          handleClick={() => { toggleModal() }}
+          handleClick={() => { toggleNodeModal() }}
         />
-        <Modal open={open} setOpen={setOpen} />
+        <SidebarButton
+          img={edgeIcon}
+          label="Edges"
+          className="hover:border-l-[1px] hover:border-gray-300 rounded-none"
+          handleClick={() => { toggleEdgeModal() }}
+        />
+        <NodesModal open={openNodeModal} setOpen={setOpenNodeModal} />
+        <EdgesModal open={openEdgeModal} setOpen={setOpenEdgeModal} />
+      </div>
+
+      <div>
+        <SidebarButton
+          img={settings}
+          label="Settings"
+          className="hover:border-l-[1px] hover:border-gray-300 rounded-none"
+          handleClick={() => { }}
+        />
       </div>
     </aside>
   );

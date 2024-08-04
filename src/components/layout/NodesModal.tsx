@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/dialog";
 import { ModalProps } from "@/lib/props";
 
-export const Modal = ({ open, setOpen }: ModalProps) => {
+export const NodesModal = ({ open, setOpen }: ModalProps) => {
     const nodes = JSON.parse(localStorage.getItem("nodes") || "[]");
 
     return (
