@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
     ReactFlow,
     Controls,
@@ -18,20 +18,28 @@ import '@xyflow/react/dist/base.css';
 
 import { MenuProps } from './lib/props';
 import { ContextMenu } from './components/layout/ContextMenu';
-import { initialNodes, nodeTypes } from './components/nodes/node.config';
-import { initialEdges, edgeTypes } from './components/edges/edge.config';
+import { loadNodes, nodeTypes } from './components/nodes/node.config';
+import { edgeTypes, loadEdges } from './components/edges/edge.config';
 
 import Sidebar from './components/layout/Sidebar';
 
 const App = () => {
-    const [nodes, setNodes] = useNodesState(initialNodes);
-    const [edges, setEdges] = useEdgesState(initialEdges);
+    const [nodes, setNodes] = useNodesState(loadNodes());
+    const [edges, setEdges] = useEdgesState(loadEdges());
     const [menu, setMenu] = useState<MenuProps | null>(null);
 
     const ref = useRef<HTMLDivElement | null>(null);
 
     const nodeXPosition = useRef(0);
     const nodeYPosition = useRef(0);
+
+    useEffect(() => {
+        localStorage.setItem('nodes', JSON.stringify(nodes));
+    }, [nodes]);
+
+    useEffect(() => {
+        localStorage.setItem('edges', JSON.stringify(edges));
+    }, [edges]);
 
     const onNodesChange: OnNodesChange = useCallback(
         (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -107,5 +115,6 @@ const App = () => {
         </div>
     );
 };
+
 
 export default App;

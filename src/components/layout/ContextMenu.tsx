@@ -47,9 +47,10 @@ export const ContextMenu = ({
                 top: top - 20,
                 left: left,
             }}
-            className="absolute p-6 rounded-2xl z-10 leading-6 glassmorphism shadow-base"
+            className="absolute px-6 rounded-2xl z-10 leading-6 glassmorphism shadow-base"
             {...props}
         >
+            <p className='mt-3 text-gray-500 text-xs'>Id: {id.slice(0, 5)}...</p>
             <SidebarButton
                 img={copy}
                 label="Copy"

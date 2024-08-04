@@ -6,3 +6,8 @@ export const edgeTypes: EdgeTypes = {
 }
 
 export const initialEdges: Edge[] = [];
+
+export const loadEdges = () => {
+    const savedEdges = localStorage.getItem('edges');
+    return savedEdges ? JSON.parse(savedEdges) : initialEdges;
+};
