@@ -1,8 +1,7 @@
 import { memo, ReactNode } from 'react';
-import { CustomNodeTypes } from './node.config';
 import { Handle, NodeProps, NodeResizer, Position } from '@xyflow/react';
 
-const CustomNode = ({ data, selected }: NodeProps<CustomNodeTypes>) => {
+const CustomNode = ({ data, selected }: NodeProps) => {
     return (
         <div className="px-4 py-2 rounded-[1rem] bg-zinc-900">
             <NodeResizer
