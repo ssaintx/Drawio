@@ -1,30 +1,48 @@
-# React + TypeScript + Vite
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/17574683-23fa-4d6f-9738-d6a2eedf49d9" alt="cover" />
+  <br />
+  <h1>Drawio</h1>
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div>
+  <h1>Overview</h1>
+  <p>This repository contains a Drawio clone built using React, TypeScript, and Vite. It leverages the reactflow library for node-based diagram creation.</p>
 
-Currently, two official plugins are available:
+  <h2>Features</h2>
+  <ul>
+    <li>Create and edit diagrams with various node and edge types</li>
+    <li>Save and load diagrams</li>
+    <li>User-friendly interface</li>
+  </ul>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  <h2>Technologies Used</h2>
+  <ul>
+    <li>reactflow</li>
+    <li>React</li>
+    <li>TypeScript</li>
+    <li>Vite</li>
+  </ul>
+</div>
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Getting Started
+Clone the repo
+  
 ```
+git clone https://github.com/ssaintx/Drawio
+```
+  
+Install dependecies
+```  
+cd Drawio
+npm install
+```
+## Run the project
+```
+npm run dev
+```  
+And go to the `localhost:5173`
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+# License
+MIT LICENSE
+# Contribution
+You all free to make open pull requests and make commits.
