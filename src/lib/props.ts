@@ -1,6 +1,7 @@
 export interface SidebarProps {
     style?: string;
-    addNode?: () => void;
+    addNode?: (data: string, description: string) => void;
+    download?: () => void;
 };
 
 export interface SidebarButtonProps {
@@ -8,6 +9,7 @@ export interface SidebarButtonProps {
     className?: string;
     label?: string;
     img?: string;
+    addNode?: (data: string, description: string) => void;
 };
 
 export interface AddNodeProps {
@@ -35,4 +37,5 @@ export interface MenuProps {
 export interface ModalProps {
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    addNode?: (data: string, description: string) => void;
 };

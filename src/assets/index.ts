@@ -6,9 +6,9 @@ import items from './icons/items.svg';
 import cancel from './icons/cancel.svg';
 import nodeIcon from './icons/nodes.svg';
 import edgeIcon from './icons/edges.svg';
-import settings from './icons/settings.svg';
-import download from './icons/download.svg';
 import deleteIcon from './icons/delete.svg';
+import settingsIcon from './icons/settings.svg';
+import downloadIcon from './icons/download.svg';
    
 
 export { 
@@ -18,9 +18,9 @@ export {
     copy,
     items,
     cancel,
-    settings,
-    download,
     nodeIcon,
     edgeIcon,
     deleteIcon,
+    settingsIcon,
+    downloadIcon,
 };
